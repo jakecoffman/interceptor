@@ -59,6 +59,7 @@ func (n *ResponderInterceptor) BindRTCPReader(reader interceptor.RTCPReader) int
 		if err != nil {
 			return 0, nil, err
 		}
+		log.Println("BindRTCReader", len(pkts))
 		for _, rtcpPacket := range pkts {
 			nack, ok := rtcpPacket.(*rtcp.TransportLayerNack)
 			if !ok {
