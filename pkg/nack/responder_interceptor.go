@@ -80,6 +80,7 @@ func (n *ResponderInterceptor) BindLocalStream(info *interceptor.StreamInfo, wri
 	}
 
 	// error is already checked in NewGeneratorInterceptor
+	log.Println("BindLocalStream", info.ID)
 	sendBuffer, _ := newSendBuffer(n.size)
 	n.streamsMu.Lock()
 	n.streams[info.SSRC] = &localStream{sendBuffer: sendBuffer, rtpWriter: writer}
