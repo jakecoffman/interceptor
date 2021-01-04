@@ -1,6 +1,7 @@
 package nack
 
 import (
+	"log"
 	"sync"
 
 	"github.com/pion/interceptor"
@@ -103,6 +104,10 @@ func (n *ResponderInterceptor) resendPackets(nack *rtcp.TransportLayerNack) {
 	n.streamsMu.Unlock()
 	if !ok {
 		return
+	}
+
+	if len(nack.Nacks) > 0 {
+		log.Println("Resending", len(nack.Nacks))
 	}
 
 	for i := range nack.Nacks {
